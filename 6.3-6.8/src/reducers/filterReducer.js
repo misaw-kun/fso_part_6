@@ -1,24 +1,18 @@
+import { createSlice } from "@reduxjs/toolkit";
+
 const initialState = {
   filterText: '',
 };
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'SET_FILTER_TEXT':
-      return {
-        ...state,
-        filterText: action.payload.query
-      }
-    default:
-      return state;
+const filterSlice = createSlice({
+  name: 'filter',
+  initialState,
+  reducers: {
+    setFilterText(state, action) {
+      return { ...state, filterText: action.payload }
+    }
   }
-}
+})
 
-export const setFilterText = query => {
-  return {
-    type: 'SET_FILTER_TEXT',
-    payload: { query }
-  }
-}
-
-export default reducer
+export const { setFilterText } = filterSlice.actions
+export default filterSlice.reducer
